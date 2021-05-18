@@ -1,0 +1,122 @@
+<meta charset="utf-8">
+<h1>JavaScript: variáveis, constantes, tipos, etc.</h1>
+<script>
+
+    /**
+     * 'use strict'
+     * a) Proibe a criação de variáveis sem um comando declarativo explícito;
+     * b) Proibe parâmetros duplicados em funções
+     * c) Proibe o uso do comando "with"
+     * d) Modifica o comportamento do comando "this"
+     * **/
+    'use strict';
+
+    /** variáveis declaradas com "var" só possuem 2 escopos: global ou local (quando dentro de uma função) */ 
+    var a = 888;
+    if (true) {
+        var b = 999;
+    }
+
+    console.log('O valor da variável "a" é: ', a);
+    console.log('O valor da variável "b" é: ', b);
+
+    function teste1() {
+        var idade = 17;
+        console.log('Variável idade dentro da função: ', idade); // OK
+    }
+
+    teste1();
+    // console.log('Idade: ', idade); // ReferenceError
+
+    // ES6 = let 
+    let c = 777;
+    if (true) {
+        let d = 666;
+        console.log('Valor de "c": ', c); // Ok
+        console.log('Valor de "d": ', d); // Ok
+    }
+
+    console.log('Valor de "c": ', c); // Ok
+    // console.log('Valor de "d": ', d); // ReferenceError
+
+    // ES6 = Constantes
+    const x = 10;
+    // x = 70; // TypeError
+
+    const animais = ['Girafa', 'Cachorro', 'Rato'];
+    console.log(animais);
+    animais.push('Pato');
+    animais.shift();
+    animais[1] = 'Gato';
+    console.log(animais);
+    // animais = []; // TypeError
+
+    // Objetos no JS (Objeto Genérico / Literal)
+    const pessoa = {
+        nome: "Pedro", // propriedades
+        sobrenome: "Oliveira",
+        idade: 35,
+
+        // métodos
+        dizerOla() {
+            console.log('Olá meu nome é: ', this.nome);
+        }
+    }
+
+    console.log(pessoa);
+    pessoa.nome = "Henrique";
+    pessoa.sexo = "M";
+    pessoa.cidade = "Barueri";
+    pessoa.dizerOla();
+    // pessoa = {}; // TypeError
+
+    // Funções em JavaScript (Function Expression e Function Declaration)
+    // Hoisting = É a capacidade do interpretador da engine do browser de reorganizar a estrutura do código antes de executá-lo
+
+    // Function Declaration
+    somar(5, 6);
+    function somar(valor1, valor2) {
+        console.log('Resultado: ', valor1 + valor2);
+    }
+
+    // Function Expression (Ñ TEM HOISTING)
+    const subtrair = function(valor1, valor2) {
+        console.log('Resultado: ', valor1 - valor2);
+    }
+    subtrair(3, 5); // A execução sempre tem que vir depois da declaração
+
+    // Escopo vazio
+    {
+        function outroTeste()
+        {
+            console.log('Teste de uso de função!');
+        }
+
+        // Exporta a função para o contexto global
+        window.outroTesteRenomeado = outroTeste;
+    }
+
+    outroTesteRenomeado();
+
+    // Tratamento de Eventos no JS (Event Handlers x Event Listeners)
+    
+    // Event Handler
+    // window.onload = function() {
+    //     console.log('Carregando dados do banco de dados...'); // db.js
+    // }
+
+    // window.onload = function() {
+    //     console.log('Exportar informações em json...'); // export.js
+    // }
+
+
+    // Event Listener
+    window.addEventListener('load', function() {
+        console.log('Carregando dados do banco de dados...'); // db.js
+    });
+
+    window.addEventListener('load', function() {
+        console.log('Exportar informações em json...'); // export.js
+    });
+
+</script>

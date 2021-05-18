@@ -1,0 +1,66 @@
+<meta charset="utf-8">
+<h1>JavaScript: querySelector & querySelectorAll</h1>
+<style>
+    p {
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 15px;
+    }
+
+    .vermelho {
+        background-color: #fff0f0;
+        border-color: red;
+        color: red;
+    }
+</style>
+
+<p>Parágrafo 1</p>
+<p class="vermelho">Parágrafo 2</p>
+<p>Parágrafo 3</p>
+<p>Parágrafo 4</p>
+<p class="vermelho">Parágrafo 5</p>
+<p class="vermelho">Parágrafo 6</p>
+<span class="vermelho">Meu span vermelho</span>
+<p>Parágrafo 7</p>
+<p>Parágrafo 8</p>
+<p>Parágrafo 9</p>
+<p id="p10">Parágrafo 10</p>
+
+<script>
+
+    /** @type {HTMLParagraphElement} */
+    const p10 = document.querySelector('#p10');
+    // p10.textContent = "Texto alterado pelo <strong>JavaScript</strong>";
+    p10.innerHTML = "Texto alterado pelo <strong>JavaScript</strong>";
+    p10.style.fontStyle = "italic";
+    p10.style.color = "green";
+
+
+    const vermelhos = document.querySelectorAll('.vermelho'); // NodeList<Element>
+    for (let i = 0; i < vermelhos.length; i++) 
+    {
+        vermelhos[i].textContent = "Alterando o texto dos vermelhos!";
+        vermelhos[i].style.fontWeight = "bold";
+    }
+
+    // for...of = Para percorrer objetos iteráveis (String, Array, NodeList, HtmlCollection, etc.)
+    for (let p of vermelhos)
+    {
+        p.textContent = "Alterando o texto com for...of!!!";
+    }
+
+    // forEach() = Método das listas derivadas de Array (NodeList)
+    vermelhos.forEach(function(p, indice) {
+        p.textContent = "Vermelho #" + indice + " foi alterado pelo forEach!!!";
+    });
+
+    // Arrow Functions = ES6
+    vermelhos.forEach(p => p.textContent = "Vermelho alterado com Arrow Functions!!!");
+
+    // function soma(v1, v2) {
+    //     return v1 + v2;
+    // }
+    const soma = (v1, v2) => v1 + v2;
+    console.log( 'Resultado:', soma(5, 3) );
+
+</script>
