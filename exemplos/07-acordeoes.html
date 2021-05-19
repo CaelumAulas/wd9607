@@ -1,0 +1,98 @@
+<meta charset="utf-8">
+<h1>JavaScript: Web Animation API (Acordeões)</h1>
+<div class="acordeoes">
+    <div class="acordeao">
+        <h4>Acordeão 1</h4>
+        <div class="conteudo">
+            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita provident expl
+                icabo id, placeat officiis sed itaque veniam, quasi nisi ea numquam perferendis deserunt, alias il
+                lo dolor necessitatibus quam officia perspiciatis?</div>
+        </div>
+    </div>
+    <div class="acordeao">
+        <h4>Acordeão 2</h4>
+        <div class="conteudo">
+            <div>Fugit inventore nostrum saepe asperiores a sed totam amet nemo obcaecati et veri
+                tatis nulla ipsam tempora dolorum voluptate reprehenderit cumque, voluptatibus modi quas incidunt
+                optio commodi expedita dicta sunt? Vitae? <br>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos porro, at, fuga cumque repellendus nam quas dolor natus officia, blanditiis temporibus? Blanditiis similique autem nesciunt ipsam a, fugiat cum id?
+                <br><br>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsam sapiente sequi excepturi quod vitae eaque, necessitatibus, repellat dolorum numquam accusamus culpa similique nobis illo earum architecto blanditiis beatae nisi.
+            </div>
+        </div>
+    </div>
+    <div class="acordeao">
+        <h4>Acordeão 3</h4>
+        <div class="conteudo">
+            <div>Beatae dolorem, quos atque officiis quod quisquam ex eveniet! Doloribus aliquam
+                quae explicabo atque voluptates ea vitae. Minus et earum fugiat temporibus ipsam provident obcaeca
+                ti, ea quidem, sequi quis sed? <br>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur ratione soluta, itaque eligendi, doloribus saepe inventore nostrum reprehenderit est officia quas? Nihil doloribus reprehenderit voluptatibus officia id facere laudantium beatae.
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 16px;
+    }
+
+    .acordeoes {
+        width: 400px;
+    }
+
+    .acordeao {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        cursor: pointer;
+        background-color: #eee;
+        margin: 0;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .conteudo {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .conteudo div {
+        padding: 20px;
+    }
+</style>
+
+<script>
+
+    const acordeoes = document.querySelector('.acordeoes');
+    const opcoesAnimacao = {
+        duration: 600,
+        fill: 'forwards'
+    };
+
+    acordeoes.addEventListener('click', event => {
+        if (event.target.tagName == 'H4') { 
+            const divConteudo = event.target.nextElementSibling;
+            let animationHeight = divConteudo.firstElementChild.offsetHeight;
+
+            if (divConteudo.offsetHeight != 0) {
+                animationHeight = 0;
+            }
+
+            divConteudo.animate({ height: animationHeight + 'px' }, opcoesAnimacao);
+            const acordeaoAtual = divConteudo.parentElement;
+            for (let acordeao of acordeoes.children) {
+                if (acordeao != acordeaoAtual) {
+                    acordeao.lastElementChild.animate({ height: '0px' }, opcoesAnimacao);
+                }
+            }
+        }
+    });
+
+</script>
