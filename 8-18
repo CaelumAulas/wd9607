@@ -1,0 +1,7 @@
+1) Adicione o evento "change" ao mural; X
+
+2) Verifique se quem disparou o evento foi um elemento do tipo "radio" checando a propriedade "type" do alvo do evento;
+
+3) Em caso positivo, guardamos a referência do cartão que seja ancestral ao "radio" clicado;
+
+4) Por fim, aplicamos como cor de fundo do cartão o valor guardado no elemento "radio".

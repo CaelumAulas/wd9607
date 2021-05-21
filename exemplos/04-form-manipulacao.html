@@ -101,7 +101,14 @@
 
         if (mensagensErro.length > 0)
         {
-            divMsg.innerHTML = "<strong>Atenção!</strong><br>" + mensagensErro.join('<br>');
+            // divMsg.innerHTML = "<strong>Atenção!</strong><br>" + mensagensErro.join('<br>');
+            divMsg.innerHTML = `
+                <strong>
+                    Atenção!
+                </strong><br>
+                ${ mensagensErro.join('<br>') }
+            `;
+
             divMsg.classList.replace('msg-sucesso', 'msg-erro');
         }
         else 

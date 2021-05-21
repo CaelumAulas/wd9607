@@ -1,0 +1,5 @@
+1) Usando Event Delegation, adicionamos o evento "keypress" ao mural e monitoramos se quem estava em foco no momento era o elemento "label" ao navegarmos via teclado pela aplicação.
+
+2) Na mesma checagem, verificamos se a tecla pressionada foi um Enter OU um Espaço (' ').
+
+3) Em caso positivo, simulamos um click no alvo do evento (que é o "label").

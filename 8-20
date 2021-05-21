@@ -1,0 +1,16 @@
+1) Guardar a referência do formulário e do campo de texto; X
+
+2) Adicionar um evento "submit" ao formulário;
+
+3) Impedir o carregamento da página quando o formulário for submetido;
+
+4) Verificar se o valor do campo de texto está vazio e em caso positivo, criar uma "div" em memória que servirá para exibir a mensagem de erro para o usuário;
+
+5) Adicionamos a essa "div" a classe "formNovoCartao-msg"
+
+6) Como conteúdo textual da "div" criada, colocamos a mensagem "Por favor, preencha o campo corretamente!"
+
+7) Inserimos a "div" na DOM como último elemento filho do formulário;
+
+8) Por fim, adicionamos o evento "animationend" à "div" criada. Como a classe "formNovoCartao-msg" tem uma animação associada a ela, para removermos a mensagem de erro da tela, precisamos esperar a animação terminar, assim, quando esse evento acontecer nós removeremos a "div" criada da DOM.
+
