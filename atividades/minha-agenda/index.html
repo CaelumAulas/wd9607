@@ -59,7 +59,45 @@
 
     <script>
 
-        // Insira sua lógica aqui
+        const formulario = document.querySelector('#formCadastro');
+        const tabela = document.querySelector('#tabelaContatos');
+
+        formulario.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const inputNome = formulario.querySelector('#inputNome');
+            const inputTel = formulario.querySelector('#inputTelefone');
+
+            if (inputNome.value.trim() == '') {
+                alert( inputNome.dataset.msg );
+            }
+            else if (inputTel.value.trim() == '') {
+                alert( inputTel.dataset.msg );
+            }
+            else {
+                // cadastrar o contato na tabela
+                let nome = inputNome.value;
+                let tel = inputTel.value;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${nome}</td>
+                    <td>${tel}</td>
+                    <td>
+					    <button	class="btn btn-danger btn-sm">
+							Excluir
+					    </button>
+                    </td>
+                `;
+
+                tabela.append(tr);
+
+                // limpa os campos do formulário
+                // inputNome.value = '';
+                // inputTel.value = '';
+
+                formulario.reset();
+            }
+        });
 
     </script>
 </body>
