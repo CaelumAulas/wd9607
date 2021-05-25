@@ -99,6 +99,12 @@
             }
         });
 
+        tabela.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn-danger')) {
+                event.target.closest('tr').remove();
+            }
+        });
+
     </script>
 </body>
 </html>

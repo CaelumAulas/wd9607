@@ -1,4 +1,18 @@
 const mural = document.querySelector('.mural');
+const template = document.querySelector('#template-cartao');
+let numeroCartao = 0;
+
+/**
+ * Cria um cartão com o conteúdo informado no mural
+ * @param {string} conteudo     Texto a ser usado como conteúdo a ser mostrado no cartão
+ */
+export function adicionarCartao(conteudo)
+{
+    numeroCartao++;
+    const cartao = template.content.querySelector('article').cloneNode(true);
+    cartao.innerHTML = cartao.innerHTML.replaceAll('{{NUMERO_CARTAO}}', numeroCartao).replace('{{CONTEUDO_CARTAO}}', conteudo);
+    mural.append(cartao);
+}
 
 export function toggleLayout() {
     mural.classList.toggle('mural--linha');

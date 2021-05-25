@@ -1,3 +1,5 @@
+import { adicionarCartao } from "./mural.js";
+
 const btn = document.querySelector('#btnAjuda');
 btn.onclick = () => {
     const mensagens = [
@@ -8,6 +10,6 @@ btn.onclick = () => {
 
     for (let msg of mensagens)
     {
-        alert(msg);
+        adicionarCartao(msg);
     }
 }
