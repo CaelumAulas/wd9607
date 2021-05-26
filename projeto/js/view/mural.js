@@ -5,12 +5,14 @@ let numeroCartao = 0;
 /**
  * Cria um cartão com o conteúdo informado no mural
  * @param {string} conteudo     Texto a ser usado como conteúdo a ser mostrado no cartão
+ * @param {string} cor          Cor a ser aplicada como background do cartão
  */
-export function adicionarCartao(conteudo)
+export function adicionarCartao(conteudo, cor = '')
 {
     numeroCartao++;
     const cartao = template.content.querySelector('article').cloneNode(true);
     cartao.innerHTML = cartao.innerHTML.replaceAll('{{NUMERO_CARTAO}}', numeroCartao).replace('{{CONTEUDO_CARTAO}}', conteudo);
+    cartao.style.backgroundColor = cor;
     mural.append(cartao);
 }
 
