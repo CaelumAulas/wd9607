@@ -1,0 +1,34 @@
+<meta charset="utf-8">
+<h1>AJAX Clássico</h1>
+<button id="btnCarregar">
+    Carregar
+</button>
+
+<button onclick="alert('Testando efeitos da single-thread')">
+    Teste
+</button>
+
+<div class="conteudo">
+    <!-- Conteúdo que será carregado pelo Ajax -->
+</div>
+
+<script>
+
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('.conteudo');
+
+    btnCarregar.addEventListener('click', function() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://jhonatanjacinto.dev/teste.php', true);
+        xhr.send();
+
+        xhr.addEventListener('load', function() {
+            divConteudo.innerHTML = xhr.responseText;
+        });
+
+        xhr.addEventListener('error', function() {
+            divConteudo.innerHTML = "Deu pau!!! Não foi possível buscar os dados!";
+        });
+    });
+
+</script>

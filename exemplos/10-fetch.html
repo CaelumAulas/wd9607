@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<h1>AJAX com FETCH API</h1>
+<button id="btnCarregar">
+    Carregar
+</button>
+
+<button onclick="alert('Testando efeitos da single-thread')">
+    Teste
+</button>
+
+<div class="conteudo">
+    <!-- Conteúdo que será carregado pelo Ajax -->
+</div>
+
+<script>
+
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('.conteudo');
+
+    btnCarregar.addEventListener('click', function() {
+        divConteudo.textContent = "Carregando...";
+        btnCarregar.textContent = "Por favor, aguarde...";
+        btnCarregar.disabled = true;
+
+        /**
+         * Promise é um objeto que processa operações assíncronas
+         * Pending: quando a solicitação está sendo processada
+         * Fulfilled: quando a solicitação foi terminada com sucesso
+         * Rejected: quando a solicitação foi rejeitada ou algum erro ocorreu no processo
+         * */
+        fetch('https://jhonatanjacinto.dev/teste.php')
+            .then(function(respostaServidor) {
+                return respostaServidor.text();
+            })
+            .then(function(conteudoConvertidoEmTexto) {
+                divConteudo.innerHTML = conteudoConvertidoEmTexto;
+            })
+            .catch(function(erro) {
+                console.error(erro);
+                divConteudo.textContent = "Deu pau!!!";
+            })
+            .finally(function() {
+                btnCarregar.disabled = false;
+                btnCarregar.textContent = "Carregar";
+            });
+    });
+
+</script>

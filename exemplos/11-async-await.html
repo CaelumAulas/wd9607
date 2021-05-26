@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<h1>AJAX com Async/Await</h1>
+<button id="btnCarregar">
+    Carregar
+</button>
+
+<button onclick="alert('Testando efeitos da single-thread')">
+    Teste
+</button>
+
+<div class="conteudo">
+    <!-- Conteúdo que será carregado pelo Ajax -->
+</div>
+
+<script>
+
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('.conteudo');
+
+    btnCarregar.addEventListener('click', async function() {
+        divConteudo.textContent = "Carregando...";
+        btnCarregar.textContent = "Por favor, aguarde...";
+        btnCarregar.disabled = true;
+
+        try 
+        {
+            const respostaServidor = await fetch('https://jhonatanjacinto.dev/teste.php');
+            const conteudoConvertidoEmTexto = await respostaServidor.text();
+            divConteudo.innerHTML = conteudoConvertidoEmTexto;
+        }
+        catch(erro) 
+        {
+            divConteudo.innerHTML = "Deu pau!!!";
+            console.error(erro);
+        }
+        finally
+        {
+            btnCarregar.disabled = false;
+            btnCarregar.textContent = "Carregar";
+        }
+        
+    });
+
+</script>
