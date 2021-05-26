@@ -13,6 +13,43 @@
 
 <script>
 
-    // Insira sua lógica aqui
+    const btnCarregar = document.querySelector('.btn');
+    const divPostsBlog = document.querySelector('.posts-blog');
+
+    btnCarregar.addEventListener('click', async function() {
+        divPostsBlog.innerHTML = '';
+        btnCarregar.textContent = 'Carregando...';
+        btnCarregar.disabled = true;
+
+        try 
+        {
+            const resposta = await fetch('https://jsonplaceholder.typicode.com/posts');
+            /** @type {Array} */
+            const listaPosts = await resposta.json();
+
+            for (let post of listaPosts)
+            {
+                const div = document.createElement('div');
+                div.classList.add('card', 'mb-3');
+                div.innerHTML = `
+                    <div class="card-header">
+                        ${post.title}
+                    </div>
+                    <div class="card-body">
+                        ${post.body}
+                    </div>
+                `;
+                divPostsBlog.append(div);
+            }
+        }
+        catch(erro) {
+            console.error(erro);
+            divPostsBlog.textContent = "Deu ruim no carregamento dos posts do blog!!!";
+        }
+        finally {
+            btnCarregar.textContent = 'Carregar Posts';
+            btnCarregar.disabled = false;
+        }
+    });
 
 </script>
