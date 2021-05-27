@@ -1,6 +1,15 @@
+import { getCartoesSalvosServidor } from "../services/CeepService.js";
+
 const mural = document.querySelector('.mural');
 const template = document.querySelector('#template-cartao');
 let numeroCartao = 0;
+
+window.addEventListener('load', async function() {
+    const listaCartoes = await getCartoesSalvosServidor();
+    listaCartoes.forEach(function(cartaoInfo) {
+        adicionarCartao(cartaoInfo.conteudo, cartaoInfo.cor);
+    });
+});
 
 /**
  * Cria um cartão com o conteúdo informado no mural
@@ -14,6 +23,24 @@ export function adicionarCartao(conteudo, cor = '')
     cartao.innerHTML = cartao.innerHTML.replaceAll('{{NUMERO_CARTAO}}', numeroCartao).replace('{{CONTEUDO_CARTAO}}', conteudo);
     cartao.style.backgroundColor = cor;
     mural.append(cartao);
+}
+
+/**
+ * Retorna uma lista contendo objetos com o conteúdo e a cor de
+ * cada cartão presente no mural da aplicação
+ * @return {Array}
+ */
+export function getCartoes()
+{
+    const cartoes = mural.querySelectorAll('.cartao');
+    const listaCartoes = Array.from(cartoes).map(function(cartao) {
+        return {
+            conteudo: cartao.querySelector('.cartao-conteudo').textContent,
+            cor: cartao.style.backgroundColor
+        }
+    });
+   
+    return listaCartoes;
 }
 
 export function toggleLayout() {
