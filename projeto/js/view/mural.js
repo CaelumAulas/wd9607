@@ -1,15 +1,37 @@
 import { getCartoesSalvosServidor } from "../services/CeepService.js";
+import { IDBSubscribeOnLoadCartoes } from "../storage/db.js";
+import notificar from "./notificacao.js";
 
 const mural = document.querySelector('.mural');
 const template = document.querySelector('#template-cartao');
 let numeroCartao = 0;
 
-window.addEventListener('load', async function() {
-    const listaCartoes = await getCartoesSalvosServidor();
-    listaCartoes.forEach(function(cartaoInfo) {
-        adicionarCartao(cartaoInfo.conteudo, cartaoInfo.cor);
+IDBSubscribeOnLoadCartoes(async function(cartoesLocais) {
+    console.log("Dados locais carregados:", cartoesLocais);
+    let listaCartoes = [];
+
+    try 
+    {
+        //throw new Error('Deu pau no back-end!!!');
+        listaCartoes = await getCartoesSalvosServidor();
+        if (cartoesLocais.length > 0 && confirm('Você ainda possui cartões salvos localmente.\nDeseja exibi-los no mural também?')) {
+            listaCartoes.push(...cartoesLocais);
+        }
+    }
+    catch(e) 
+    {
+        listaCartoes = cartoesLocais;
+        if (listaCartoes.length == 0) {
+            notificar('Não há cartões salvos localmente para serem exibidos!');
+        }
+    }
+
+    mural.innerHTML = '';
+    listaCartoes.forEach(cartao => {
+        adicionarCartao(cartao.conteudo, cartao.cor);
     });
 });
+
 
 /**
  * Cria um cartão com o conteúdo informado no mural
